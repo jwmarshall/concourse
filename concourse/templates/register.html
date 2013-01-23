@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="span4 offset4 well">
+            <form method="POST" action="{% url register %}">
+                {% csrf_token %}
+
+                <legend>Register</legend>
+                {% if form.errors %}
+                    <div class="alert alert-error">
+                        <a class="close" data-dismess="alert" href="#">x</a>{{ form.errors }}
+                    </div>
+                {% endif %}
+
+                <fieldset>
+                    {{ form.as_p }}
+{% comment %}
+                    <label>Full Name</label>
+                    <div class="controls">
+                        <input type="text" id="id_first_name" name="first_name" placeholder="First Name" class="input-medium">
+                        <input type="text" id="id_last_name" name="last_name" placeholder="Last Name" class="input-medium">
+                        <p></p>
+                    </div>
+                    <label for="email">Email</label>
+                    <input type="text" id="id_email" name="email" placeholder="Email" class="input-block-level">
+                    <label for="username">Username</label>
+                    <input type="text" id="id_username" name="username" placeholder="Username" class="input-block-level">
+                    <label for="password">Password</label>
+                    <input type="text" id="id_password" name="password" placeholder="Password" class="input-block-level">
+                    <label for="password_confirm">Password Confirmation</label>
+                    <input type="text" id="id_password_confirm" name="password_confirm" placeholder="Password Confirmation" class="input-block-level">
+                    <label>Terms of Service</label>
+                    <div class="controls checkbox">
+                        <input type="checkbox" name="remember" value="1"> I have read the agree to the terms of service.
+                    </div>
+{% endcomment %}
+                    <br>
+                    <button type="submit" name="submit" class="btn btn-success btn-block">Register</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
