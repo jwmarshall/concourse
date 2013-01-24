@@ -55,14 +55,14 @@
                         </div>
                     </div>
 
-                    <div class="control-group {% if form.tos_agree.errors %}error{% endif %}">
+                    <div class="control-group {% if form.tos.errors %}error{% endif %}">
                         <label for="id_tos" class="control-label">Terms of Service</label>
                         <div class="controls checkbox">
                             <input id="id_tos" type="checkbox" name="tos"> I have read the agree to the <a href="{% url terms %}" title="Terms of Service">terms of service</a>.
                         </div>
                     </div>
 
-                    <div class="control-group {% if form.tos_agree.errors %}error{% endif %}">
+                    <div class="control-group {% if form.privacy.errors %}error{% endif %}">
                         <label for="id_privacy" class="control-label">Privacy Policy</label>
                         <div class="controls checkbox">
                             <input id="id_privacy" type="checkbox" name="privacy"> I have read the agree to the <a href="{% url privacy %}" title="Privacy Policy">privacy policy</a>.
