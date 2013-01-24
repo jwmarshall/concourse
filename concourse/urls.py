@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {}, 'login'),
     url(r'^logout/$', logout_user, {}, 'logout'),
     url(r'^register/$', register, {}, 'register'),
+    url(r'^terms/$', direct_to_template, {'template': 'terms.html'}, 'terms'),
+    url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, 'privacy'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
