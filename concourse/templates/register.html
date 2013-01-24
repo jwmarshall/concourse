@@ -9,33 +9,66 @@
                 <legend>Register</legend>
                 {% if form.errors %}
                     <div class="alert alert-error">
-                        <a class="close" data-dismess="alert" href="#">x</a>{{ form.errors }}
+                        <a class="close" data-dismiss="alert" href="#">x</a>Registration failed!
+                        {{ form.non_field_errors }}
                     </div>
                 {% endif %}
 
                 <fieldset>
-                    {{ form.as_p }}
-{% comment %}
-                    <label>Full Name</label>
-                    <div class="controls">
-                        <input type="text" id="id_first_name" name="first_name" placeholder="First Name" class="input-medium">
-                        <input type="text" id="id_last_name" name="last_name" placeholder="Last Name" class="input-medium">
-                        <p></p>
+                    <div class="control-group{% if form.email.errors %} error{% endif %}"> 
+                        <label for="id_email" class="control-label">Email</label>
+                        <div class="controls">
+                            <input type="text" id="id_email" name="email" placeholder="{{ form.email.help_text }}" class="input-block-level"{% if form.email.value %} value="{{ form.email.value }}"{% endif %}>
+                            {% if form.email.errors %}
+                                {{ form.email.errors }}
+                            {% endif %} 
+                        </div>
                     </div>
-                    <label for="email">Email</label>
-                    <input type="text" id="id_email" name="email" placeholder="Email" class="input-block-level">
-                    <label for="username">Username</label>
-                    <input type="text" id="id_username" name="username" placeholder="Username" class="input-block-level">
-                    <label for="password">Password</label>
-                    <input type="text" id="id_password" name="password" placeholder="Password" class="input-block-level">
-                    <label for="password_confirm">Password Confirmation</label>
-                    <input type="text" id="id_password_confirm" name="password_confirm" placeholder="Password Confirmation" class="input-block-level">
-                    <label>Terms of Service</label>
-                    <div class="controls checkbox">
-                        <input type="checkbox" name="remember" value="1"> I have read the agree to the terms of service.
+
+                    <div class="control-group{% if form.username.errors %} error{% endif %}">
+                        <label for="id_username" class="control-label">Username</label>
+                        <div class="controls">
+                            <input type="text" id="id_username" name="username" placeholder="{{ form.username.help_text }}" class="input-block-level"{% if form.username.value %} value="{{ form.username.value }}"{% endif %}>
+                            {% if form.username.errors %}
+                                {{ form.username.errors }}
+                            {% endif %} 
+                        </div>
                     </div>
-{% endcomment %}
-                    <br>
+
+                    <div class="control-group{% if form.password1.errors %} error{% endif %}">
+                        <label for="id_password1" class="control-label">Password</label>
+                        <div class="controls">
+                            <input type="text" id="id_password1" name="password1" placeholder="{{ form.password1.help_text }}" class="input-block-level">
+                            {% if form.password1.errors %}
+                                {{ form.password1.errors }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="control-group{% if form.password2.errors %} error{% endif %}">
+                        <label for="id_password2" class="control-label">Password Confirmation</label>
+                        <div class="controls">
+                            <input type="text" id="id_password2" name="password2" placeholder="{{ form.password2.help_text }}" class="input-block-level">
+                            {% if form.password2.errors %}
+                                {{ form.password2.errors }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="control-group {% if form.tos_agree.errors %}error{% endif %}">
+                        <label for="id_tos" class="control-label">Terms of Service</label>
+                        <div class="controls checkbox">
+                            <input id="id_tos" type="checkbox" name="tos"> I have read the agree to the <a href="{% url terms %}" title="Terms of Service">terms of service</a>.
+                        </div>
+                    </div>
+
+                    <div class="control-group {% if form.tos_agree.errors %}error{% endif %}">
+                        <label for="id_privacy" class="control-label">Privacy Policy</label>
+                        <div class="controls checkbox">
+                            <input id="id_privacy" type="checkbox" name="privacy"> I have read the agree to the <a href="{% url privacy %}" title="Privacy Policy">privacy policy</a>.
+                        </div>
+                    </div>
+
                     <button type="submit" name="submit" class="btn btn-success btn-block">Register</button>
                 </fieldset>
             </form>
