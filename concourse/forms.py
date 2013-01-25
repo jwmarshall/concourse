@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 class RegisterForm(UserCreationForm):
+    error_messages = { 
+        'duplicate_username': _("Username has already been registered."),
+        'password_mismatch': _("Password fields must match.")
+    }
     email = forms.EmailField(required=True)
     tos = forms.BooleanField(
         label = _("Terms of Service"),
@@ -50,7 +54,11 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('Password must have a number.')
         return password
 
-        '''super(RegisterForm, self).clean_password1()'''
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if email and User.objects.filter(email=email).count() > 0:
+            raise forms.ValidationError('Email address has already been registered.')
+        return email
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
