@@ -1,3 +1,4 @@
+import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -22,15 +23,34 @@ class RegisterForm(UserCreationForm):
             'invalid': _("Invalid username. Alphanumeric characters only.")
         }
     )
+    password1 = forms.CharField(
+        label = _("Password"),
+        widget = forms.PasswordInput,
+        help_text = _("Uppercase, lowercase, and a number.") 
+    )
     password2 = forms.CharField(
         label = _("Password confirmation"),
         widget = forms.PasswordInput,
-        help_text=_("Enter the same password as above.")
+        help_text = _("Enter the same password as above.")
     )
 
     class Meta:
         model = User
         fields = ("email","username","password1","password2")
+
+    def clean_password1(self):
+        password = self.cleaned_data.get("password1")
+        if len(password) < 8:
+            raise forms.ValidationError('Password must be at least 8 characters.')
+        elif not re.findall(r'[A-Z]', password):
+            raise forms.ValidationError('Password must have an uppercase letter.')
+        elif not re.findall(r'[a-z]', password):
+            raise forms.ValidationError('Password must have a lowercase letter.')
+        elif not re.findall(r'[0-9]', password):
+            raise forms.ValidationError('Password must have a number.')
+        return password
+
+        '''super(RegisterForm, self).clean_password1()'''
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
