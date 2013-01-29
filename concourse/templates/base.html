@@ -11,7 +11,8 @@
     <style type="text/css">
         body { padding-top:60px; }
         label { font-weight:bold; }
-        ul.errorlist { margin-left:0; margin-top:-12px; list-style-type:none; float:right; clear:both; }
+        ul.errorlist { margin-left:0; margin-top:-10px; list-style-type:none; float:right; clear:both; }
+        .checkbox .errorlist { margin-top:-5px; }
         ul.errorlist li { font-size:11px; font-weight:bold; color:#b94a48; }
     </style>
     <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
@@ -58,10 +59,21 @@
             </form>
 -->
           </div><!--/.nav-collapse -->
-          <ul class="nav pull-right">
-                <li><a href="/login/">Log In</a></li>
-                <li><a href="/register/">Register</a></li>
-            </ul>
+          {% if user.is_authenticated %}
+              <ul class="nav pull-right">
+                <li>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url django.contrib.auth.views.logout %}" title="Log Out">Log Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+          {% else %}
+              <ul class="nav pull-right">
+                <li><a href="{% url django.contrib.auth.views.login %}">Log In</a></li>
+                <li><a href="{% url registration_register %}">Register</a></li>
+              </ul>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -82,8 +94,9 @@
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script> 
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
 
     {% block footer %}{% endblock %}
 </body>

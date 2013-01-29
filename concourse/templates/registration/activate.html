@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Account Activation{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span4 offset4 well">
+            {% if account %}
+                <div class="alert alert-success">
+                    Activation complete!
+                </div>
+                <p>Registration is now complete and your account has been activated.</p>
+                <a href="{% url login %} class="btn btn-success btn-block">Log In</a>
+            {% else % }
+                <div class="alert alert-error">
+                   Activation failed!
+                   <p>We could not activate your account, please check the link in your email and try again.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

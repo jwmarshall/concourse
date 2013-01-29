@@ -1,41 +1,66 @@
 import re
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from registration.forms import RegistrationForm
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-class RegisterForm(UserCreationForm):
+class ConcourseRegistrationForm(RegistrationForm):
+    default_widget_class = 'input-block-level'
+
     error_messages = { 
         'duplicate_username': _("Username has already been registered."),
         'password_mismatch': _("Password fields must match.")
     }
-    email = forms.EmailField(required=True)
-    tos = forms.BooleanField(
-        label = _("Terms of Service"),
-        required = True
-    )
-    privacy = forms.BooleanField(
-        label = _("Privacy Policy"),
-        required = True
-    )
+
     username = forms.RegexField(
-        label = _("Username"),
+        label = _("Username"), 
         max_length = 30,
         regex = r'^[\w_]+$',
-        help_text = _("30 character limit, alphanumeric only."),
+        required = True,
+        widget = forms.TextInput(
+            attrs = {
+                'class': default_widget_class,
+                'placeholder': _("30 character limit, alphanumeric only.")
+            }
+        ),
         error_messages = {
             'invalid': _("Invalid username. Alphanumeric characters only.")
         }
     )
+    email = forms.EmailField(
+        label = _("Email"),
+        required = True,
+        max_length = 75,
+        widget = forms.TextInput(attrs={'class': default_widget_class}),
+        error_messages = {
+            'invalid': _("Invalid email address.")
+        }
+    )
     password1 = forms.CharField(
-        label = _("Password"),
-        widget = forms.PasswordInput,
-        help_text = _("Uppercase, lowercase, and a number.") 
+        label = _("Password"), 
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': default_widget_class,
+                'placeholder': _("Uppercase, lowercase, and a number.")
+            },
+            render_value=False
+        )
     )
     password2 = forms.CharField(
-        label = _("Password confirmation"),
-        widget = forms.PasswordInput,
-        help_text = _("Enter the same password as above.")
+        label = _("Password Confirmation"),
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': default_widget_class,
+                'placeholder': _("Enter the same password as above."),
+            },
+            render_value=False
+        )
+    )
+    tos = forms.BooleanField(
+        label = _("Terms of Service"),
+        required = True,
+        widget = forms.CheckboxInput(attrs={'class': default_widget_class}),
+        help_text = _("I have read and agree to the Terms of Service")
     )
 
     class Meta:

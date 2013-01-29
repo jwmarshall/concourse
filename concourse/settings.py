@@ -23,7 +23,8 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/login/'
+#LOGIN_URL = '/accounts/login/'
+ACCOUNT_ACTIVATION_DAYS	= 15
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -89,7 +90,7 @@ SECRET_KEY = '8je+ped@&amp;$n2w28kiee(lzwl6v57&amp;#&amp;h*iow!ee*^vk+o!k5%4'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,9 +125,10 @@ INSTALLED_APPS = (
     #'bootstrap_toolkit',
     'django_admin_bootstrapped',
     # Uncomment the next line to enable the admin:
-     'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'registration',
 )
 
 # A sample logging configuration. The only tangible logging
