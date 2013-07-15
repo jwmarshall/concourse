@@ -1,3 +1,4 @@
-python-mysql
+mysql-python
 django
 django-admin-bootstrapped
+-e git+https://github.com/mwieler/django-registration-1.5.git#egg=registration
