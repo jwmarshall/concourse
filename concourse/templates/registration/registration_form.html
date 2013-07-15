@@ -5,7 +5,7 @@
 {% block content %}
     <div class="row">
         <div class="span4 offset4 well">
-            <form method="POST" action="{% url registration_register %}">
+            <form method="POST" action="{% url 'registration_register' %}">
                 {% csrf_token %}
 
                 <legend>Register</legend>
@@ -68,7 +68,7 @@
                     <div class="control-group {% if form.tos.errors %}error{% endif %}">
                         <label for="id_tos" class="control-label">Terms of Service</label>
                         <div class="controls checkbox">
-                            <input id="id_tos" type="checkbox" name="tos"> I have read and agree to the <a href="{% url terms %}" title="Terms of Service">Terms of Service</a>
+                            <input id="id_tos" type="checkbox" name="tos"> I have read and agree to the <a href="{% url 'terms' %}" title="Terms of Service">Terms of Service</a>
                         </div>
                     </div>
 
