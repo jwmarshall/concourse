@@ -1,7 +1,7 @@
 from concourse.forms import ConcourseRegistrationForm
 from concourse.views import *
 from django.conf.urls import patterns, include, url
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 from registration.forms import RegistrationFormTermsOfService
 from registration.views import register
 
@@ -27,8 +27,8 @@ urlpatterns = patterns('',
 #    url(r'^accounts/logout/$', logout_user, {}, 'logout'),
 #    url(r'^accounts/register/$', register, {}, 'register'),
 #    url(r'^accounts/registration_complete/$', direct_to_template, {'template': 'registered.html'}, 'registration_complete'),
-    url(r'^terms/$', direct_to_template, {'template': 'terms.html'}, 'terms'),
-    url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, 'privacy'),
+    url(r'^terms/$', TemplateView.as_view(template_name='terms.html'), name='terms'),
+    url(r'^privacy/$', TemplateView.as_view(template_name='privacy.html'), name='privacy'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
